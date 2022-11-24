@@ -8,27 +8,32 @@ const taskControllers = require('./tasks.controllers')
 
 const getAllTodos = (req, res) => {
     const data = taskControllers.findAllTodos()
-    res.status(200).json(data)
+        .then(() => {
+            res.status(400).json(data)
+        })
+        .catch(e => {
+            res.status(400).json({ message: e.message })
+        })
 }
 
 const getTodoById = (req, res) => {
-    const id = req.params.id 
+    const id = req.params.id
     const data = taskControllers.findTodoById(id)
-    if(data){
+    if (data) {
         res.status(200).json(data)
     } else {
-        res.status(404).json({message: 'Invalid ID'})
+        res.status(404).json({ message: 'Invalid ID' })
     }
 }
 
 const postTodo = (req, res) => {
-    const {title, description} = req.body
+    const { title, description } = req.body
 
-    if(title && description){
-        const data = taskControllers.createTodo({title, description})
+    if (title && description) {
+        const data = taskControllers.createTodo({ title, description })
         res.status(201).json(data)
-    }else {
-        res.status(400).json({message: 'Invalid Data', fields: {title: 'String', description: 'String'}})
+    } else {
+        res.status(400).json({ message: 'Invalid Data', fields: { title: 'String', description: 'String' } })
     }
 }
 

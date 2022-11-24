@@ -1,19 +1,21 @@
 //? Este archivo va a manejar todo lo relacionado a acciones de la base de datos de todo's
+const Tasks = require("../models/user.model")
 
 const todoDB = []
-//? TODO 
-//* {
-//*     id: 5,
-//*     title: 'Practicar express',
-//*     description: 'Ver videos de apoyo y crear otra API',
-//*     is_completed: false
-//* }
+    //? TODO 
+    //* {
+    //*     id: 5,
+    //*     title: 'Practicar express',
+    //*     description: 'Ver videos de apoyo y crear otra API',
+    //*     is_completed: false
+    //* }
 
 let id = 1
 
-const findAllTodos = () => {
+const findAllTodos = async() => {
     //? Esta funcion debe de traer todos los todo's de mi base de datos
-    return todoDB
+    const data = await Tasks.findAll()
+    return data
 }
 
 const findTodoById = (id) => {
@@ -36,7 +38,6 @@ const createTodo = (obj) => {
 
 module.exports = {
     findAllTodos,
-    findTodoById, 
+    findTodoById,
     createTodo
 }
-

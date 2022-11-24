@@ -2,13 +2,16 @@
 const express = require('express')
 
 const taskRouter = require('./tasks/tasks.router')
-
-//? Initial configs
+const db = require("./utils/database")
+    //? Initial configs
 const port = 9000
 const app = express()
-//? Habilitar recibir formato JSON
+    //? Habilitar recibir formato JSON
 app.use(express.json())
 
+db.sync()
+    .then(() => console.log("database sincronizado correctamente"))
+    .catch(e => console.log(e))
 
 app.get('/', (req, res) => {
     res.json({
@@ -67,4 +70,3 @@ app.listen(port, () => {
 //!         res.status(404).json({message: 'Invalid ID'})
 //!     }
 //! })
-
