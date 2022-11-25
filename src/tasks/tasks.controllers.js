@@ -14,13 +14,20 @@ let id = 1
 
 const findAllTodos = async() => {
     //? Esta funcion debe de traer todos los todo's de mi base de datos
-    const data = await Tasks.findAll()
+    const data = await Tasks.findAll() //select * from Task
     return data
 }
 
-const findTodoById = (id) => {
+const findTodoById = async(id) => {
     //? Esta funcion debe de retornar un todo dependiendo el id
-    const todo = todoDB.find(item => item.id == id)
+    // const todo = todoDB.find(item => item.id == id)
+
+    const todo = await Tasks.findOne({
+        where: {
+            id: id
+        }
+
+    })
     return todo
 }
 

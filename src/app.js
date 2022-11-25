@@ -9,7 +9,7 @@ const app = express()
     //? Habilitar recibir formato JSON
 app.use(express.json())
 
-db.sync()
+db.sync() //crear las tablas de una base de datos
     .then(() => console.log("database sincronizado correctamente"))
     .catch(e => console.log(e))
 

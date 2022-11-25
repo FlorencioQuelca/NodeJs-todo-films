@@ -6,8 +6,22 @@ const taskControllers = require('./tasks.controllers')
 //* taskControllers.findAllTodos()
 //* taskControllers.findTodoById()
 
+const getAllTodosWithTryCatch = (req, res) => {
+
+
+    try {
+        const data = taskControllers.findAllTodos()
+        res.status(400).json(data)
+        return data
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+        return error
+    }
+}
+
 const getAllTodos = (req, res) => {
-    const data = taskControllers.findAllTodos()
+    //const data =
+    taskControllers.findAllTodos()
         .then(() => {
             res.status(400).json(data)
         })
@@ -16,14 +30,23 @@ const getAllTodos = (req, res) => {
         })
 }
 
-const getTodoById = (req, res) => {
+const getTodoById = (req, res) => { //
     const id = req.params.id
-    const data = taskControllers.findTodoById(id)
-    if (data) {
-        res.status(200).json(data)
-    } else {
-        res.status(404).json({ message: 'Invalid ID' })
-    }
+        //const data =
+    taskControllers.findTodoById(id)
+        .then((data) => {
+            if (data) {
+                res.status(200).json(data)
+            } else {
+                res.status(404).json({ message: 'Invalid ID' })
+            }
+            // res.status(200).json(data)
+        })
+        .catch((er) => {
+            res.status(404).json({ message: er.message })
+        })
+
+
 }
 
 const postTodo = (req, res) => {
