@@ -31,15 +31,12 @@ const findTodoById = async(id) => {
     return todo
 }
 
-const createTodo = (obj) => {
+const createTodo = async(obj) => {
     //? Esta funcion debe de crear un nuevo todo en mi base de datos y retornar el todo creado
-    const newTodo = {
-        id: id++,
+    const newTodo = await Tasks.create({
         title: obj.title,
         description: obj.description,
-        is_completed: false
-    }
-    todoDB.push(newTodo)
+    })
     return newTodo
 }
 

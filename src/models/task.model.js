@@ -26,6 +26,9 @@ const Tasks = db.define('tasks', {
     is_completed: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    {
+        timestamps: false
     }
 
 })

@@ -51,13 +51,15 @@ const getTodoById = (req, res) => { //
 
 const postTodo = (req, res) => {
     const { title, description } = req.body
+    taskControllers.createTodo({ title, description })
+        .then((data) => {
 
-    if (title && description) {
-        const data = taskControllers.createTodo({ title, description })
-        res.status(201).json(data)
-    } else {
-        res.status(400).json({ message: 'Invalid Data', fields: { title: 'String', description: 'String' } })
-    }
+            res.status(201).json(data)
+        })
+        .catch(err => {
+            res.status(400).json({ message: err.message, fields: { title: 'String', description: 'String' } })
+        })
+
 }
 
 module.exports = {
