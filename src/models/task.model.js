@@ -27,9 +27,7 @@ const Tasks = db.define('tasks', {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
-    {
-        timestamps: false
-    }
-
+}, {
+    timestamps: false
 })
 module.exports = Tasks

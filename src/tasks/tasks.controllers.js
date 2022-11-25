@@ -1,5 +1,5 @@
 //? Este archivo va a manejar todo lo relacionado a acciones de la base de datos de todo's
-const Tasks = require("../models/user.model")
+const Tasks = require("../models/task.model")
 
 const todoDB = []
     //? TODO 
@@ -22,13 +22,13 @@ const findTodoById = async(id) => {
     //? Esta funcion debe de retornar un todo dependiendo el id
     // const todo = todoDB.find(item => item.id == id)
 
-    const todo = await Tasks.findOne({
+    const data = await Tasks.findOne({
         where: {
             id: id
         }
 
     })
-    return todo
+    return data
 }
 
 const createTodo = async(obj) => {
@@ -39,9 +39,27 @@ const createTodo = async(obj) => {
     })
     return newTodo
 }
+const updateTodo = async(id, obj) => {
+    const data = await Tasks.update(obj, {
+        where: {
+            id: id
+        }
+    })
+    return data
+}
+const deleteTodo = async(id) => {
+    const data = await Tasks.destroy({
+        where: {
+            id: id
+        }
+    })
+    return data
+}
 
 module.exports = {
     findAllTodos,
     findTodoById,
-    createTodo
+    createTodo,
+    updateTodo,
+    deleteTodo
 }

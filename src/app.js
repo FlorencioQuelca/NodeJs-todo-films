@@ -15,7 +15,7 @@ db.sync() //crear las tablas de una base de datos
 
 app.get('/', (req, res) => {
     res.json({
-        message: 'OK'
+        message: 'OK1'
     })
 })
 
